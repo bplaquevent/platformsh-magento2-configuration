@@ -133,7 +133,11 @@ class Platformsh
             $this->log(sprintf('Copied directory: %s', $dir));
         }
 
-        if (!file_exists('app/etc/env.php')) {
+        $env = null;
+        if (file_exists('app/etc/env.php')) {
+            $env = include 'app/etc/env.php';
+        }
+        if (!isset($env['db'])) {
             $this->installMagento();
         } else {
             $this->updateMagento();
