@@ -34,6 +34,8 @@ class Platformsh
     protected $adminPassword;
     protected $adminUrl;
 
+    protected $useSampleData;
+
     protected $redisHost;
     protected $redisScheme;
     protected $redisPort;
@@ -176,6 +178,8 @@ class Platformsh
             ? $this->desiredApplicationMode
             : false;
 
+        $this->useSampleData = isset($var['USE_SAMPLE_DATA']) ? $var['USE_SAMPLE_DATA'] : false;
+
         $this->redisHost = $relationships['redis'][0]['host'];
         $this->redisScheme = $relationships['redis'][0]['scheme'];
         $this->redisPort = $relationships['redis'][0]['port'];
@@ -245,6 +249,10 @@ class Platformsh
             --admin-lastname=$this->adminLastname \
             --admin-email=$this->adminEmail \
             --admin-password=$this->adminPassword";
+        if ($this->useSampleData) {
+            $command .= ' \
+            --use-sample-data';
+        }
 
         if (strlen($this->dbPassword)) {
             $command .= " \
