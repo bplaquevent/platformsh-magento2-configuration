@@ -16,7 +16,7 @@ class Platformsh
 
     protected $debugMode = false;
 
-    protected $platformReadWriteDirs = ['var/di', 'var/generation', 'app/etc'];
+    protected $platformReadWriteDirs = ['var/di', 'var/generation', 'app/etc', 'pub/media'];
 
     protected $urls = ['unsecure' => [], 'secure' => []];
 
